@@ -2,6 +2,7 @@ const REPEAT_TIMES: usize = 100_000;
 const DATA_LENGTH: usize = 10_000;
 
 use rand::{thread_rng, RngCore};
+use rayon::prelude::*;
 use sha2::{Digest, Sha256};
 use std::time::Instant;
 
@@ -10,14 +11,12 @@ fn main() {
 
     print!("Threads count: {}, ", rayon::current_num_threads());
 
-    rayon::scope(|spawner| {
-        (0..REPEAT_TIMES).for_each(|_| {
-            spawner.spawn(move |_| {
-                let bytes = gen_bytes();
-                gen_sha(bytes);
-            });
+    (0..REPEAT_TIMES)
+        .into_par_iter()
+        .map(|_| gen_bytes())
+        .for_each(|bytes| {
+            gen_sha(bytes);
         });
-    });
 
     println!("Measured: {}ms.", now.elapsed().as_millis());
 }

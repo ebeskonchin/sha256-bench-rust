@@ -18,7 +18,7 @@ fn main() {
             gen_sha(bytes);
         });
 
-    println!("Measured: {}ms.", now.elapsed().as_millis());
+    println!("Measured: {:?}.", now.elapsed());
 }
 
 fn gen_sha(from: [u8; DATA_LENGTH]) {

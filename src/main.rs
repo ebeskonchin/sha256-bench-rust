@@ -8,7 +8,7 @@ use std::time::Instant;
 fn main() {
     let now = Instant::now();
 
-    println!("Threads count: {}", rayon::current_num_threads());
+    print!("Threads count: {}, ", rayon::current_num_threads());
 
     rayon::scope(|spawner| {
         (0..REPEAT_TIMES).for_each(|_| {

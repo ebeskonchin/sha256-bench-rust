@@ -9,9 +9,10 @@ fn main() {
     let now = Instant::now();
 
     rayon::scope(|spawner| {
-        (0..REPEAT_TIMES).map(|_| gen_bytes()).for_each(|data| {
+        (0..REPEAT_TIMES).for_each(|_| {
             spawner.spawn(move |_| {
-                gen_sha(data);
+                let bytes = gen_bytes();
+                gen_sha(bytes);
             });
         });
     });

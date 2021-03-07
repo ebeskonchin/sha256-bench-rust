@@ -8,7 +8,7 @@ use std::time::Instant;
 fn main() {
     let now = Instant::now();
 
-    let result = crossbeam::scope(|spawner| {
+    rayon::scope(|spawner| {
         (0..REPEAT_TIMES).map(|_| gen_bytes()).for_each(|data| {
             spawner.spawn(move |_| {
                 gen_sha(data);
@@ -16,14 +16,7 @@ fn main() {
         });
     });
 
-    match result {
-        Ok(_) => {
-            println!("Measured: {}ms.", now.elapsed().as_millis());
-        }
-        Err(err) => {
-            println!("Error: {:?}", err);
-        }
-    }
+    println!("Measured: {}ms.", now.elapsed().as_millis());
 }
 
 fn gen_sha(from: [u8; DATA_LENGTH]) {

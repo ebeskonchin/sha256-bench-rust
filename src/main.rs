@@ -1,10 +1,10 @@
-const REPEAT_TIMES: usize = 100_000;
-const DATA_LENGTH: usize = 10_000;
-
 use rand::{thread_rng, RngCore};
 use rayon::prelude::*;
 use sha2::{Digest, Sha256};
 use std::time::Instant;
+
+const REPEAT_TIMES: usize = 100_000;
+const DATA_LENGTH: usize = 10_000;
 
 fn main() {
     let now = Instant::now();

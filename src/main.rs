@@ -14,9 +14,7 @@ fn main() {
     (0..REPEAT_TIMES)
         .into_par_iter()
         .map(|_| gen_bytes())
-        .for_each(|bytes| {
-            gen_sha(bytes);
-        });
+        .for_each(gen_sha);
 
     println!("Measured: {:?}.", now.elapsed());
 }

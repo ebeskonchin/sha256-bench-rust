@@ -21,7 +21,7 @@ fn main() {
 
 fn gen_sha(from: [u8; DATA_LENGTH]) {
     let mut sha = Sha256::new();
-    sha.update(&from);
+    sha.update(from);
     sha.finalize();
 }
 

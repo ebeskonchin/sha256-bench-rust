@@ -9,3 +9,7 @@ edition = "2018"
 rand = "0.9.1"
 sha2 = "0.10.9"
 rayon = "1.10.0"
+
+[profile.release]
+lto = "thin"
+debug = "none"

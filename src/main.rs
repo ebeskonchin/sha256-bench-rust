@@ -1,4 +1,4 @@
-use rand::{thread_rng, RngCore};
+use rand::{rng, RngCore};
 use rayon::prelude::*;
 use sha2::{Digest, Sha256};
 use std::time::Instant;
@@ -27,6 +27,6 @@ fn gen_sha(from: [u8; DATA_LENGTH]) {
 
 fn gen_bytes() -> [u8; DATA_LENGTH] {
     let mut result = [0u8; DATA_LENGTH];
-    thread_rng().fill_bytes(&mut result);
+    rng().fill_bytes(&mut result);
     result
 }
